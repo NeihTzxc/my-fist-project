@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Segoe UI" Size="9" />
+  <Class Name="QLBH._class.cls_myFunctions" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@class\cls_myFunctions.cs</FileName>
+      <HashCode>AAAAAAAAAAAQAAAAAAAIAAAAAAAAACAAAgAAACAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._class.cLsImageList" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@class\cLsImageList.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._class.clsORACEL" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@class\clsORACEL.cs</FileName>
+      <HashCode>AAAAAAgAgAAgAKAAAAAABAIAgAAAAAAACAAAAAIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frm_login" Collapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frm_login.cs</FileName>
+      <HashCode>AIAAAgkAACAEIBAAgACIAAAiAAAAQAAAAAAAAABBBAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frm_report" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frm_report.cs</FileName>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAIAAAAAAAEAAAQAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmAbout" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmAbout.cs</FileName>
+      <HashCode>IAAAIAAAACAAAAAAAACAAAQCAAAIIAAAEEQAAABAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmChange_pass" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmChange_pass.cs</FileName>
+      <HashCode>gIAEAQBAACAAQBAAAACFBRAKAQAMASAAAAQAARAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmChi_tiet_nhap" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmChi_tiet_nhap.cs</FileName>
+      <HashCode>IlAFkFABACQQQJwFitCBEEAOQ0AaACQAGWAACQiEECA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmChi_tiet_xuat" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmChi_tiet_xuat.cs</FileName>
+      <HashCode>IlAEEEBBECQRQpQAhtCBEECOQ0AaICQAGWCACQiEECA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmHang_hoa" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmHang_hoa.cs</FileName>
+      <HashCode>MlAAFkAAACQQQJYAgsCIEQD2QxAIACQBiWAAAQgEGGA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmHoa_don_nhap" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmHoa_don_nhap.cs</FileName>
+      <HashCode>YlAAEEAhBCRQAJAAgsCCQwAOQUAOQKQAGWAAAQgEECA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmHoa_don_xuat" Collapsed="true">
+    <Position X="12.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmHoa_don_xuat.cs</FileName>
+      <HashCode>YlAAEEAhACRQAJEIgsCDAwgOQUAKAKwAGWAAAQgEEGA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmIn_hoa_don_n" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmIn_hoa_don_n.cs</FileName>
+      <HashCode>AgAAAAABADAAQRAAAAGcBAACEQAKIAAICAAAAQIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmIn_hoa_don_x" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmIn_hoa_don_x.cs</FileName>
+      <HashCode>AhAAAAAAADAAQVAAAAGNBAACAQAaAAAICAAAAQIAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmKhach_hang" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmKhach_hang.cs</FileName>
+      <HashCode>EnAAEEAAACoUQZgABuigAAgCwwEIACQICCAADwBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmLoai_hang" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmLoai_hang.cs</FileName>
+      <HashCode>AlAAMEAAACQUAJAAgsKIEQCGQwgIACQACSAAAQgEMGA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmNha_cung_cap" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmNha_cung_cap.cs</FileName>
+      <HashCode>EnAAEEACACAQQJAAAsiABCCCQQEIECRgCCQIBSFBhAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmNhan_vien" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmNhan_vien.cs</FileName>
+      <HashCode>c3AA2ksAAKBUQZAAAsqgAAACQQE5ACQACCCEBQBAgAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Chi_tiet_nhap" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Chi_tiet_nhap.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Chi_tiet_xuat" Collapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Chi_tiet_xuat.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Hang__hoa" Collapsed="true">
+    <Position X="0.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Hang_hoa.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Hoa_don_nhap" Collapsed="true">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Hoa_don_nhap.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Hoa_don_xuat" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Hoa_don_xuat.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Khach_hang" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Khach_hang.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Loai_hang" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Loai_hang.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Nha_cung_cap" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Nha_cung_cap.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQ_Nhan_vien" Collapsed="true">
+    <Position X="11" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQ_Nhan_vien.cs</FileName>
+      <HashCode>ABAEAAAAACAAAAAAgICAABACAAAAAAAAAAAAAUBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmQly_sxep" Collapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmQly_sxep.cs</FileName>
+      <HashCode>ABAIEAAFACAAABAAAiDAAAACAUA4ACAAgXAIAQDfRwA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.frmThong_ke" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\frmThong_ke.cs</FileName>
+      <HashCode>AAEAAAAAADAAQBAAAACAAAACAQAIECBAIAAAASABAwE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.MDIParent" Collapsed="true">
+    <Position X="9.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\MDIParent.cs</FileName>
+      <HashCode>IAAoAAAAACCAIBgAIACIAArCAEyYARAAgEAOAQhABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH._forms.Welcome" Collapsed="true">
+    <Position X="5.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>@form\Welcome.cs</FileName>
+      <HashCode>AAQAAAQQASAAABBAAACIAAACAAAAIAAAAAAAAQBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Data.DataSet_in_hoa_don_nhap" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAwCAEAZABAAASAAAAAgCQBgAAAAACAEABBE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Data.DataSet_in_hoa_don_xuat" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAwGAAAJABAACQgAAAAgCQBgAAAAACAEABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Data.DataSet_in_hoa_don_nhapTableAdapters.CHI_TIET_NHAPTableAdapter" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAAMAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Data.DataSet_in_hoa_don_nhapTableAdapters.HANG_HOATableAdapter" Collapsed="true">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAAMAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Data.DataSet_in_hoa_don_xuatTableAdapters.CHI_TIET_XUATTableAdapter" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAAMAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Data.DataSet_in_hoa_don_xuatTableAdapters.HANG_HOATableAdapter" Collapsed="true">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAAMAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Program" Collapsed="true">
+    <Position X="11" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Program.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Properties.Resources" Collapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAgAAQAwCEAAAAAAAABEgAAAQKQAAAAIACQAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Properties.Settings" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAACAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.ds_hh" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_hh.cs</FileName>
+      <HashCode>AAgAAAABAAAQAAAAAAAIAAAAAAAAAAAACAAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedds_hh" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_hh.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.ds_hh_het_han" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_hh_het_han.cs</FileName>
+      <HashCode>AAgAAAABAAAQAAAAAAAIAAAAAAAAAAAACAAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedds_hh_het_han" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_hh_het_han.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.ds_kh" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_kh.cs</FileName>
+      <HashCode>AAgAAAABAAAQAAAAAAAIAAAAAAAAAAAACAAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedds_kh" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_kh.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.ds_lh" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_lh.cs</FileName>
+      <HashCode>AAgAAAABAAAQAAAAAAAIAAAAAAAAAAAACAAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedds_lh" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_lh.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.ds_ncc" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_ncc.cs</FileName>
+      <HashCode>AAgAAAABAAAQAAAAAAAIAAAAAAAAAAAACAAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedds_ncc" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_ncc.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.ds_nv" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_nv.cs</FileName>
+      <HashCode>AAgAAAABAAAQAAAAAAAIAAAAAAAAAAAACAAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedds_nv" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\ds_nv.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.in_hoa_don_n" Collapsed="true">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\in_hoa_don_n.cs</FileName>
+      <HashCode>AAgAAABBAAAQAAAAAAAIEAAAAAAAQAAACAAAAwAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedin_hoa_don_n" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\in_hoa_don_n.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.in_hoa_don_x" Collapsed="true">
+    <Position X="7.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\in_hoa_don_x.cs</FileName>
+      <HashCode>AAgAAEABAAAQAAAAAAAIEAAAAAAAQAAACCAAAgAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedin_hoa_don_x" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\in_hoa_don_x.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.thong_ke_n" Collapsed="true">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\thong_ke_n.cs</FileName>
+      <HashCode>AAgAAAABAAAQAAAAAAAIAAAAAAAAAAIACAAAAgAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedthong_ke_n" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\thong_ke_n.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="QLBH.Report.thong_ke_x" Collapsed="true">
+    <Position X="4" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\thong_ke_x.cs</FileName>
+      <HashCode>AAgAAAABAAAQAAAAAAAIAAAAAAAAAAIACAAAAgAABAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QLBH.Report.Cachedthong_ke_x" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>Report\thong_ke_x.cs</FileName>
+      <HashCode>AAAAACAAAAAFAEAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+</ClassDiagram>

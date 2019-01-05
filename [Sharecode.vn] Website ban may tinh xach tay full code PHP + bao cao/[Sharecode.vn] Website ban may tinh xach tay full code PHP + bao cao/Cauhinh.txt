@@ -1,0 +1,10 @@
+
+             Download source code t?i Sharecode.vn
+
+
+
+
+Thay doi cau hinh du lieu trong File: connect.php
+Thông tin dang nhap Admin:
+	- Ten DN: Admin
+	- Pass: xuanquoc
