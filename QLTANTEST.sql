@@ -1,617 +1,694 @@
-﻿CREATE DATABASE QLTANtest2
+﻿CREATE DATABASE QLTAN_GITHUB1
+go
+USE QLTAN_GITHUB1
 GO
-USE QLTANtest2
-GO
-CREATE TABLE Luong --Mức lương cơ bản = Mức lương cơ sở x Hệ số lương
-(
-BacLuong INT NOT NULL CHECK (BacLuong>0),
-LuongCoSo NUMERIC(10,2),
-HeSoLuong INT DEFAULT 1 CHECK (HeSoLuong>0),
-PRIMARY KEY (BacLuong)
-)
-GO
+
 CREATE TABLE NhanVien
 (
-IDNhanVien CHAR(8) NOT NULL,
+IDNhanVien CHAR(4) NOT NULL,
+HoNhanVien NVARCHAR(30) NOT NULL,
 TenNhanVien NVARCHAR(30) NOT NULL,
 NgaySinh DATE CHECK ((YEAR(GETDATE())-YEAR(NgaySinh))>=18),
 GioiTinh CHAR(1) DEFAULT 'M' CHECK (GioiTinh IN ('M','F')),
 DiaChi NVARCHAR(50),
-PhuCap NUMERIC(10,2),
 Sdt CHAR(10),
-BacLuong INT NOT NULL CHECK (BacLuong>0),
-PRIMARY KEY (IDNhanVien),
-FOREIGN KEY (BacLuong) REFERENCES dbo.Luong(BacLuong)
+CONSTRAINT PK_NV PRIMARY KEY (IDNhanVien)
+
+)
+GO
+CREATE TABLE Luong --Lương tháng = (Lương + Phụ cấp (nếu có) / ngày công chuẩn của tháng)x Số ngày làm việc thực tế
+(
+SttLuong CHAR(2) NOT NULL,
+IDNhanVien CHAR(4) NOT NULL,
+Luong NUMERIC(10,2) NOT NULL,
+Thang INT NOT NULL,
+NgayCong INT DEFAULT 26,
+SoNgayLamViec INT,
+PhuCap NUMERIC(10,2),
+CONSTRAINT PK_Long PRIMARY KEY (SttLuong),
+CONSTRAINT FK_Luong_NV FOREIGN KEY (IDNhanVien) REFERENCES NhanVien(IDNhanVien)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
 )
 GO
 CREATE TABLE MonAn
 (
-MaMon CHAR(8) NOT NULL,
+MaMon CHAR(4) NOT NULL,
 TenMon NVARCHAR(30) NOT NULL,
 DonGia NUMERIC(10,2),
 DonViTinh NVARCHAR(10),
 PRIMARY KEY (MaMon)
 )
 GO
-
-CREATE TABLE DonHang
-(
-
-MaDonHang CHAR(8) PRIMARY KEY NOT NULL,
-MaMon CHAR(8) NOT NULL,
-SoLuong INT CHECK(SoLuong>0),
-GhiChu NVARCHAR(30),
-
-FOREIGN KEY (MaMon) REFERENCES dbo.MonAn(MaMon),
-
-)
-GO
 CREATE TABLE HoaDon
 (
-MaHoaDon CHAR(8) NOT NULL,
-MaDonHang CHAR(8) NOT NULL,
-IDNhanVien CHAR(8) NOT NULL,
-ThoiGian DATETIME2,
-PRIMARY KEY (MaHoaDon),
-FOREIGN KEY (IDNhanVien) REFERENCES dbo.NhanVien(IDNhanVien),
-FOREIGN KEY (MaDonHang) REFERENCES dbo.DonHang(MaDonHang)
+MaDonHang CHAR(4) NOT NULL,
+IDNhanVien CHAR(4) NOT NULL,
+ThoiGian DATETIME,
+CONSTRAINT PK_HD_MDH PRIMARY KEY (MaDonHang),
+CONSTRAINT FK_HD_NV FOREIGN KEY (IDNhanVien) REFERENCES NhanVien(IDNhanVien)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+)
+CREATE TABLE DonHang
+(
+STT INT NOT NULL,
+MaDonHang CHAR(4)  NOT NULL,
+MaMon CHAR(4) NOT NULL,
+SoLuong INT CHECK(SoLuong>0),
+GhiChu NVARCHAR(30),
+CONSTRAINT PK_DH PRIMARY KEY (STT),
+CONSTRAINT FK_DH_HD FOREIGN KEY (MaDonHang) REFERENCES HoaDon(MaDonHang),
+CONSTRAINT FK_DH_MA FOREIGN KEY (MaMon) REFERENCES MonAn(MaMon)
+
 )
 GO
+
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV01' , -- IDNhanVien - char(4)
+			N'Nguyễn',
+          N' Hoài An' , -- TenNhanVien - nvarchar(30)
+          '1973-02-15'  , -- NgaySinh - date
+          'F' , -- GioiTinh - char(1)
+          N'25/3 Lạc Long Quân, Q.10,TP HCM' , -- DiaChi - nvarchar(50)
+          '0824806888'  -- Sdt - char(10)
+        )
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV02' , -- IDNhanVien - char(8)
+N'Trần',
+          N'Trà Hương' , -- TenNhanVien - nvarchar(30)
+          '1960-06-20' , -- NgaySinh - date
+          'F' , -- GioiTinh - char(1)
+          N'125 Trần Hưng Đạo, Q.1, TP HCM' , -- DiaChi - nvarchar(50)
+          '0824800999' -- Sdt - char(10)
+          
+        )
+		go
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV03' , -- IDNhanVien - char(8)
+N'Nguyễn',
+          N'Ngọc Ánh' , -- TenNhanVien - nvarchar(30)
+          '1975-05-11' , -- NgaySinh - date
+          'F' , -- GioiTinh - char(1)
+          N'12/21 Võ Văn Ngân Thủ Đức, TP HCM' , -- DiaChi - nvarchar(50)
+          '0824722888'  -- Sdt - char(10)
+          
+        )
+go
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV04' , -- IDNhanVien - char(8)
+N'Trương',
+          N'Nam Sơn' , -- TenNhanVien - nvarchar(30)
+          '1959-06-20' , -- NgaySinh - date
+          'M' , -- GioiTinh - char(1)
+          N'215 Lý Thường Kiệt,TP Biên Hòa' , -- DiaChi - nvarchar(50)
+          '0824684999'  -- Sdt - char(10)
+        
+        )
+go
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV05' , -- IDNhanVien - char(8)
+N'Lý',
+          N'Hoàng Hà' , -- TenNhanVien - nvarchar(30)
+          '1954-10-23' , -- NgaySinh - date
+          'M' , -- GioiTinh - char(1)
+          N'22/5 Nguyễn Xí, Q.Bình Thạnh, TP HCM' , -- DiaChi - nvarchar(50)
+          '0843546888' -- Sdt - char(10)
+         
+        )
+go
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV06' , -- IDNhanVien - char(8)
+N'Trần',
+          N'Bạch Tuyết' , -- TenNhanVien - nvarchar(30)
+         '1980-05-20' , -- NgaySinh - date
+          'F' , -- GioiTinh - char(1)
+          N'127 Hùng Vương, TP Mỹ Tho' , -- DiaChi - nvarchar(50)
+          '0973206878'  -- Sdt - char(10)
+          
+        )
+go
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV07' , -- IDNhanVien - char(8)
+N'Nguyễn',
+          N'An Trung' , -- TenNhanVien - nvarchar(30)
+          '1976-06-05' , -- NgaySinh - date
+          'M' , -- GioiTinh - char(1)
+          N'234 3/2, TP Biên Hòa' , -- DiaChi - nvarchar(50)
+          '0975636353'  -- Sdt - char(10)
+        
+        )
+go
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV08' , -- IDNhanVien - char(8)
+N'Trần',
+          N'Hoàng Nam' , -- TenNhanVien - nvarchar(30)
+          '1975-11-22' , -- NgaySinh - date
+          'M' , -- GioiTinh - char(1)
+          N'234 Trấn Não,An Phú, TP HCM' , -- DiaChi - nvarchar(50)
+          '0977375179'  -- Sdt - char(10)
+          
+        )
+go
+INSERT INTO dbo.NhanVien
+        
+       
+VALUES  ( 'NV09' , -- IDNhanVien - char(8)
+N'Phạm',
+          N'Nam Thanh' , -- TenNhanVien - nvarchar(30)
+         '1980-12-12' , -- NgaySinh - date
+          'M' , -- GioiTinh - char(1)
+          N'221 Hùng Vương,Q.5, TP HCM' , -- DiaChi - nvarchar(50)
+          '0972567079'  -- Sdt - char(10)
+         
+        )
+go
+INSERT INTO dbo.NhanVien
+        
+VALUES  ( 'NV10' , -- IDNhanVien - char(8)
+N'Nguyễn',
+          N'Quang Hùng' , -- TenNhanVien - nvarchar(30)
+          '1990-01-14' , -- NgaySinh - date
+          'M' , -- GioiTinh - char(1)
+          N'289 Hai Bà Trưng, phường 8, quận 3, TP HCM' , -- DiaChi - nvarchar(50)
+          '0975261579'  -- Sdt - char(10)
+         
+        )
+--đã insert 
+SELECT IDNhanVien,NgaySinh,DiaChi,Sdt,HoNhanVien+TenNhanVien AS HoTen FROM dbo.NhanVien
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000001', -- MaMon - char(8)
+VALUES  ( 'F001', -- MaMon - char(8)
           N'cánh gà chiên', -- TenMon - nvarchar(30)
           47000, -- DonGia - numeric
           N'3 cái'  -- DonViTinh - nvarchar(10)
           )
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000002', -- MaMon - char(8)
+VALUES  ( 'F002', -- MaMon - char(8)
           'cánh gà chiên', -- TenMon - varchar(30)
           69000, -- DonGia - numeric
           N'5 miếng'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000003', -- MaMon - char(8)
+VALUES  ( 'F003', -- MaMon - char(8)
           'khoai tây chiên', -- TenMon - varchar(30)
           12000, -- DonGia - numeric
           N'vừa'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000004', -- MaMon - char(8)
+VALUES  ( 'F004', -- MaMon - char(8)
           'khoai tây chiên', -- TenMon - varchar(30)
           25000, -- DonGia - numeric
           N'lớn'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000005', -- MaMon - char(8)
+VALUES  ( 'F005', -- MaMon - char(8)
           'khoai tây chiên', -- TenMon - varchar(30)
           35000, -- DonGia - numeric
           N'đại'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000006', -- MaMon - char(8)
+VALUES  ( 'F006', -- MaMon - char(8)
           'khoai tây nghiền', -- TenMon - varchar(30)
           10000, -- DonGia - numeric
           N'vừa'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000007', -- MaMon - char(8)
+VALUES  ( 'F007', -- MaMon - char(8)
           'khoai tây nghiền', -- TenMon - varchar(30)
           10000, -- DonGia - numeric
           N'lớn'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000008', -- MaMon - char(8)
+VALUES  ( 'F008', -- MaMon - char(8)
           'khoai tây nghiền', -- TenMon - varchar(30)
           10000, -- DonGia - numeric
           N'đại'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000009', -- MaMon - char(8)
+VALUES  ( 'F009', -- MaMon - char(8)
           'cơm gà ', -- TenMon - varchar(30)
           39000, -- DonGia - numeric
           N'dĩa'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000010', -- MaMon - char(8)
+VALUES  ( 'F010', -- MaMon - char(8)
           'cơm phile gà quay tiêu', -- TenMon - varchar(30)
           39000, -- DonGia - numeric
           N'dĩa'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000011', -- MaMon - char(8)
+VALUES  ( 'F011', -- MaMon - char(8)
           'cơm phile gà quay flava', -- TenMon - varchar(30)
           39000, -- DonGia - numeric
           N'dĩa'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F000012', -- MaMon - char(8)
+VALUES  ( 'F012', -- MaMon - char(8)
           'bơ gơ ocean', -- TenMon - varchar(30)
           22000, -- DonGia - numeric
           N'cái'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000013', -- MaMon - char(8)
+VALUES  ( 'F013', -- MaMon - char(8)
           'bơ gơ tôm', -- TenMon - varchar(30)
           39000, -- DonGia - numeric
           N'cái'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000014', -- MaMon - char(8)
+VALUES  ( 'F014', -- MaMon - char(8)
           'bơ gơ gà quay flava', -- TenMon - varchar(30)
           45000, -- DonGia - numeric
           N'cái'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F0000015', -- MaMon - char(8)
+VALUES  ( 'F015', -- MaMon - char(8)
           'bơ gơ zinger', -- TenMon - varchar(30)
           49000, -- DonGia - numeric
           N'cái'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'D0000001', -- MaMon - char(8)
+VALUES  ( 'D001', -- MaMon - char(8)
           'Pepsi tươi', -- TenMon - varchar(30)
           10000, -- DonGia - numeric
           N'ly nhỏ'  -- DonViTinh - nvarchar(10)
           )
+		  go
 INSERT INTO dbo.MonAn
         ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'D0000002', -- MaMon - char(8)
+VALUES  ( 'D002', -- MaMon - char(8)
           'Pepsi tươi', -- TenMon - varchar(30)
           17000, -- DonGia - numeric
           N'ly lớn'  -- DonViTinh - nvarchar(10)
           )
--- đã insert
-INSERT INTO dbo.Luong
-        ( BacLuong, LuongCoSo, HeSoLuong )
-VALUES  ( 1, -- BacLuong - int
-          1390000, -- LuongCoSo - numeric
-          1  -- HeSoLuong - int
-          )
-		  go
-INSERT INTO dbo.Luong
-        ( BacLuong, LuongCoSo, HeSoLuong )
-VALUES  ( 2, -- BacLuong - int
-          1435000, -- LuongCoSo - numeric
-          2  -- HeSoLuong - int
-          )
-		  go
-INSERT INTO dbo.Luong
-        ( BacLuong, LuongCoSo, HeSoLuong )
-VALUES  ( 3, -- BacLuong - int
-          1523000, -- LuongCoSo - numeric
-          3  -- HeSoLuong - int
-          )
-		  go
-INSERT INTO dbo.Luong
-        ( BacLuong, LuongCoSo, HeSoLuong )
-VALUES  ( 4, -- BacLuong - int
-          1639000, -- LuongCoSo - numeric
-          4  -- HeSoLuong - int
-          )
-		  go
---đã insert
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000001' , -- IDNhanVien - char(8)
-          N'Nguyễn Hoài An' , -- TenNhanVien - nvarchar(30)
-          '1973-02-15' , -- NgaySinh - date
-          'F' , -- GioiTinh - char(1)
-          N'25/3 Lạc Long Quân, Q.10,TP HCM' , -- DiaChi - nvarchar(50)
-          '0824806888' , -- Sdt - char(10)
-          1  -- BacLuong - int
-        )
-		go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000002' , -- IDNhanVien - char(8)
-          N'Trần Trà Hương' , -- TenNhanVien - nvarchar(30)
-          '1960-06-20' , -- NgaySinh - date
-          'F' , -- GioiTinh - char(1)
-          N'125 Trần Hưng Đạo, Q.1, TP HCM' , -- DiaChi - nvarchar(50)
-          '0824800999' , -- Sdt - char(10)
-          1  -- BacLuong - int
-        )
-		go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000003' , -- IDNhanVien - char(8)
-          N'Nguyễn Ngọc Ánh' , -- TenNhanVien - nvarchar(30)
-          '1975-05-11' , -- NgaySinh - date
-          'F' , -- GioiTinh - char(1)
-          N'12/21 Võ Văn Ngân Thủ Đức, TP HCM' , -- DiaChi - nvarchar(50)
-          '0824722888' , -- Sdt - char(10)
-          1  -- BacLuong - int
-        )
-go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000004' , -- IDNhanVien - char(8)
-          N'Trương Nam Sơn' , -- TenNhanVien - nvarchar(30)
-          '1959-06-20' , -- NgaySinh - date
-          'M' , -- GioiTinh - char(1)
-          N'215 Lý Thường Kiệt,TP Biên Hòa' , -- DiaChi - nvarchar(50)
-          '0824684999' , -- Sdt - char(10)
-          1  -- BacLuong - int
-        )
-go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000005' , -- IDNhanVien - char(8)
-          N'Lý Hoàng Hà' , -- TenNhanVien - nvarchar(30)
-          '1954-10-23' , -- NgaySinh - date
-          'M' , -- GioiTinh - char(1)
-          N'22/5 Nguyễn Xí, Q.Bình Thạnh, TP HCM' , -- DiaChi - nvarchar(50)
-          '0843546888' , -- Sdt - char(10)
-          1  -- BacLuong - int
-        )
-go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000006' , -- IDNhanVien - char(8)
-          N'Trần Bạch Tuyết' , -- TenNhanVien - nvarchar(30)
-         '1980-05-20' , -- NgaySinh - date
-          'F' , -- GioiTinh - char(1)
-          N'127 Hùng Vương, TP Mỹ Tho' , -- DiaChi - nvarchar(50)
-          '0973206878' , -- Sdt - char(10)
-          1  -- BacLuong - int
-        )
-go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000007' , -- IDNhanVien - char(8)
-          N'Nguyễn An Trung' , -- TenNhanVien - nvarchar(30)
-          '1976-06-05' , -- NgaySinh - date
-          'M' , -- GioiTinh - char(1)
-          N'234 3/2, TP Biên Hòa' , -- DiaChi - nvarchar(50)
-          '0975636353' , -- Sdt - char(10)
-          2  -- BacLuong - int
-        )
-go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000008' , -- IDNhanVien - char(8)
-          N'Trần Hoàng Nam' , -- TenNhanVien - nvarchar(30)
-          '1975-11-22' , -- NgaySinh - date
-          'M' , -- GioiTinh - char(1)
-          N'234 Trấn Não,An Phú, TP HCM' , -- DiaChi - nvarchar(50)
-          '0977375179' , -- Sdt - char(10)
-          1  -- BacLuong - int
-        )
-go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000009' , -- IDNhanVien - char(8)
-          N'Phạm Nam Thanh' , -- TenNhanVien - nvarchar(30)
-         '1980-12-12' , -- NgaySinh - date
-          'M' , -- GioiTinh - char(1)
-          N'221 Hùng Vương,Q.5, TP HCM' , -- DiaChi - nvarchar(50)
-          '0972567079' , -- Sdt - char(10)
-          2  -- BacLuong - int
-        )
-go
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien ,
-          NgaySinh ,
-          GioiTinh ,
-          DiaChi ,
-          Sdt ,
-          BacLuong
-        )
-VALUES  ( 'NV000010' , -- IDNhanVien - char(8)
-          N'Nguyễn Quang Hùng' , -- TenNhanVien - nvarchar(30)
-          '1990-01-14' , -- NgaySinh - date
-          'M' , -- GioiTinh - char(1)
-          N'289 Hai Bà Trưng, phường 8, quận 3, TP HCM' , -- DiaChi - nvarchar(50)
-          '0975261579' , -- Sdt - char(10)
-          1  -- BacLuong - int
-        )
-GO
--- đã insert
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000001', -- MaDonHang - char(8)
-          'F0000001', -- MaMon - char(8)
-          2, -- SoLuong - int
-          N''  -- GhiChu - nvarchar(30)
-          )
-go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000002', -- MaDonHang - char(8)
-          'F0000006', -- MaMon - char(8)
-          2, -- SoLuong - int
-          N''  -- GhiChu - nvarchar(30)
-          )
-		  go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000003', -- MaDonHang - char(8)
-          'D0000001', -- MaMon - char(8)
-          2, -- SoLuong - int
-          N''  -- GhiChu - nvarchar(30)
-          )
-		  go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000004', -- MaDonHang - char(8)
-          'F0000009', -- MaMon - char(8)
-          1, -- SoLuong - int
-          N'chỉ gà chiên'  -- GhiChu - nvarchar(30)
-          )
-		  go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000005', -- MaDonHang - char(8)
-          'D0000002', -- MaMon - char(8)
-          1, -- SoLuong - int
-          N''  -- GhiChu - nvarchar(30)
-          )
-		  go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000006', -- MaDonHang - char(8)
-          'F0000010', -- MaMon - char(8)
-          10, -- SoLuong - int
-          N'ít cay'  -- GhiChu - nvarchar(30)
-          )
-		  go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000007', -- MaDonHang - char(8)
-          'F0000006', -- MaMon - char(8)
-          1, -- SoLuong - int
-          N''  -- GhiChu - nvarchar(30)
-          )
-		  go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000008', -- MaDonHang - char(8)
-          'F0000013', -- MaMon - char(8)
-          5, -- SoLuong - int
-          N''  -- GhiChu - nvarchar(30)
-          )
-		  go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000009', -- MaDonHang - char(8)
-          'F0000015', -- MaMon - char(8)
-          20, -- SoLuong - int
-          N''  -- GhiChu - nvarchar(30)
-          )
-		  go
-INSERT INTO dbo.DonHang
-        ( MaDonHang, MaMon, SoLuong, GhiChu )
-VALUES  ( 'DH000010', -- MaDonHang - char(8)
-          'D0000002', -- MaMon - char(8)
-          20, -- SoLuong - int
-          N''  -- GhiChu - nvarchar(30)
-          )
 		  GO
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
-          MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
+          --đã insert
+SELECT * FROM dbo.MonAn
+UPDATE dbo.MonAn SET DonGia=20000 WHERE MaMon='D002'
+--Đơn hàng 
+
+
+--insert dữ liệu bảng Luong
+UPDATE dbo.Luong SET PhuCap=221000 WHERE SttLuong='10'
+INSERT INTO dbo.Luong
+        
+VALUES  ( '10','NV01' , -- IDNhanVien - char(4)
+          3450000 , -- Luong - numeric
+          1 , -- Thang - int
+          26 , -- NgayCong - int
+          24 , -- SoNgayLamViec - int
+          NULL  -- PhuCap - numeric
         )
-VALUES  ( 'HD000001' , -- MaHoaDon - char(8)
-          'DH000001' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
-        )          
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
-          MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
+		go
+INSERT INTO dbo.Luong
+        
+VALUES  ( '9','NV02' , -- IDNhanVien - char(4)
+          6530000 , -- Luong - numeric
+          1 , -- Thang - int
+          26, -- NgayCong - int
+          24 , -- SoNgayLamViec - int
+          0  -- PhuCap - numeric
         )
-VALUES  ( 'HD000002' , -- MaHoaDon - char(8)
-          'DH000003' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
+		go
+INSERT INTO dbo.Luong
+        
+VALUES  ( '8','NV03' , -- IDNhanVien - char(4)
+          5214000, -- Luong - numeric
+          1 , -- Thang - int
+          26 , -- NgayCong - int
+          25 , -- SoNgayLamViec - int
+          234000  -- PhuCap - numeric
         )
-		
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
-          MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
+		go
+INSERT INTO dbo.Luong
+        
+VALUES  ( '7','NV04' , -- IDNhanVien - char(4)
+          4314000, -- Luong - numeric
+          1 , -- Thang - int
+          26 , -- NgayCong - int
+          26 , -- SoNgayLamViec - int
+          230000  -- PhuCap - numeric
         )
-VALUES  ( 'HD000003' , -- MaHoaDon - char(8)
-          'DH000004' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
+		go
+INSERT INTO dbo.Luong
+        
+VALUES  ( '6','NV05' , -- IDNhanVien - char(4)
+          8230000 , -- Luong - numeric
+          1 , -- Thang - int
+          26 , -- NgayCong - int
+          26 , -- SoNgayLamViec - int
+          345000  -- PhuCap - numeric
         )
+		go
+INSERT INTO dbo.Luong
+        
+VALUES  ('5', 'NV06' , -- IDNhanVien - char(4)
+          3460000 , -- Luong - numeric
+          1 , -- Thang - int
+          26 , -- NgayCong - int
+          26 , -- SoNgayLamViec - int
+          234000  -- PhuCap - numeric
+        )
+		go
+INSERT INTO dbo.Luong
+       
+VALUES  ( '4','NV07' , -- IDNhanVien - char(4)
+          4550000 , -- Luong - numeric
+          1 , -- Thang - int
+          26 , -- NgayCong - int
+          26 , -- SoNgayLamViec - int
+          1020000  -- PhuCap - numeric
+        )
+		go
+INSERT INTO dbo.Luong
+        
+VALUES  ( '3','NV08' , -- IDNhanVien - char(4)
+          12300000 , -- Luong - numeric
+          1 , -- Thang - int
+          26, -- NgayCong - int
+          26, -- SoNgayLamViec - int
+          341000  -- PhuCap - numeric
+        )
+		go
+INSERT INTO dbo.Luong
+        
+VALUES  ( '2','NV09' , -- IDNhanVien - char(4)
+          7340000 , -- Luong - numeric
+          1 , -- Thang - int
+          26 , -- NgayCong - int
+          24 , -- SoNgayLamViec - int
+          230000  -- PhuCap - numeric
+        )
+		go
+INSERT INTO dbo.Luong
+        
+VALUES  ('1', 'NV10' , -- IDNhanVien - char(4)
+          3210000 , -- Luong - numeric
+          1 , -- Thang - int
+          26 , -- NgayCong - int
+          12, -- SoNgayLamViec - int
+          0  -- PhuCap - numeric
+        )
+		go
 		--đã insert
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
+
+		--hóa đơn
+		INSERT INTO dbo.HoaDon
+		        ( MaDonHang, IDNhanVien, ThoiGian )
+		VALUES  ( 'DH01', -- MaDonHang - char(4)
+		          'NV02', -- IDNhanVien - char(4)
+		          GETDATE()  -- ThoiGian - datetime
+		          )
+	INSERT INTO dbo.DonHang
+	        ( STT ,
+	          MaDonHang ,
+	          MaMon ,
+	          SoLuong ,
+	          GhiChu
+	        )
+	VALUES  ( 1 , -- STT - int
+	          'DH01' , -- MaDonHang - char(4)
+	          'F001' , -- MaMon - char(4)
+	          1 , -- SoLuong - int
+	          N''  -- GhiChu - nvarchar(30)
+	        )
+INSERT INTO dbo.DonHang
+	        ( STT ,
+	          MaDonHang ,
+	          MaMon ,
+	          SoLuong ,
+	          GhiChu
+	        )
+	VALUES  ( 2 , -- STT - int
+	          'DH01' , -- MaDonHang - char(4)
+	          'D001' , -- MaMon - char(4)
+	          2 , -- SoLuong - int
+	          N''  -- GhiChu - nvarchar(30)
+	        )
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH02', -- MaDonHang - char(4)
+          'NV02', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+INSERT INTO dbo.DonHang
+        ( STT ,
           MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
+          MaMon ,
+          SoLuong ,
+          GhiChu
         )
-VALUES  ( 'HD000005' , -- MaHoaDon - char(8)
-          'DH000002' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
+VALUES  ( 3 , -- STT - int
+          'DH02' , -- MaDonHang - char(4)
+          'F006' , -- MaMon - char(4)
+          2 , -- SoLuong - int
+          N''  -- GhiChu - nvarchar(30)
         )
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
+		go
+INSERT INTO dbo.DonHang
+        ( STT ,
           MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
+          MaMon ,
+          SoLuong ,
+          GhiChu
         )
-VALUES  ( 'HD000006' , -- MaHoaDon - char(8)
-          'DH000010' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
-        )
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
-          MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
-        )
-VALUES  ( 'HD000007' , -- MaHoaDon - char(8)
-          'DH000008' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
-        )
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
-          MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
-        )
-VALUES  ( 'HD000008' , -- MaHoaDon - char(8)
-          'DH000009' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
-        )
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
-          MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
-        )
-VALUES  ( 'HD000009' , -- MaHoaDon - char(8)
-          'DH000006' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
-        )
-INSERT dbo.HoaDon
-        ( MaHoaDon ,
-          MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
-        )
-VALUES  ( 'HD000010' , -- MaHoaDon - char(8)
-          'DH000007' , -- MaDonHang - char(8)
-          'NV000001' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
+VALUES  ( 4 , -- STT - int
+          'DH02' , -- MaDonHang - char(4)
+          'D002' , -- MaMon - char(4)
+          2 , -- SoLuong - int
+          N''  -- GhiChu - nvarchar(30)
         )
 INSERT INTO dbo.HoaDon
-        ( MaHoaDon ,
-          MaDonHang ,
-          IDNhanVien ,
-          ThoiGian
-        )
-VALUES  ( 'DH000004' , -- MaHoaDon - char(8)
-          'DH000005' , -- MaDonHang - char(8)
-          'NV000003' , -- IDNhanVien - char(8)
-          GETDATE()  -- ThoiGian - datetime2
-        )
---thêm dữ liệu cho cột phụ cấp
-UPDATE dbo.NhanVien SET PhuCap = 234000 WHERE (IDNhanVien='NV000001')
-go
-UPDATE dbo.NhanVien SET PhuCap = 500000 WHERE (IDNhanVien='NV000002')
-go
-UPDATE dbo.NhanVien SET PhuCap = 142000 WHERE (IDNhanVien='NV000003')
-go
-UPDATE dbo.NhanVien SET PhuCap = 356000 WHERE (IDNhanVien='NV000004')
-go
-UPDATE dbo.NhanVien SET PhuCap = 132000 WHERE (IDNhanVien='NV000005')
-go
-UPDATE dbo.NhanVien SET PhuCap = 145000 WHERE (IDNhanVien='NV000006')
-go
-UPDATE dbo.NhanVien SET PhuCap = 274000 WHERE (IDNhanVien='NV000007')
-go
-UPDATE dbo.NhanVien SET PhuCap = 265000 WHERE (IDNhanVien='NV000008')
-go
-UPDATE dbo.NhanVien SET PhuCap = 148000 WHERE (IDNhanVien='NV000009')
-go
-UPDATE dbo.NhanVien SET PhuCap = 178000WHERE (IDNhanVien='NV000010')
-go
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH03', -- MaDonHang - char(4)
+          'NV01', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+INSERT INTO DonHang VALUES ( 5,'DH03','F015',5,N'cay nhiều')
+GO
+INSERT INTO DonHang VALUES ( 6,'DH03','F002',5,N'')
 SELECT * FROM dbo.DonHang
-SELECT * FROM dbo.MonAn
-SELECT * FROM dbo.NhanVien
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH04', -- MaDonHang - char(4)
+          'NV01', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+INSERT INTO DonHang VALUES ( 7,'DH04','F005',1,N'')
+go
+INSERT INTO DonHang VALUES ( 8,'DH04','F002',2,N'')
+go
+INSERT INTO DonHang VALUES ( 9,'DH04','D002',2,N'')
 SELECT * FROM dbo.HoaDon
-USE QLTANtest2
-INSERT INTO dbo.NhanVien
-        ( IDNhanVien ,
-          TenNhanVien,
-		  BacLuong
-          
-        )
-VALUES  ( 'NV000013' , -- IDNhanVien - char(8)
-          N'Cô Hiền',  -- TenNhanVien - nvarchar(30)
-          1
-        )
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH05', -- MaDonHang - char(4)
+          'NV01', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+INSERT INTO DonHang VALUES ( 10,'DH05','F004',2,N'')
+go
+INSERT INTO DonHang VALUES (11 ,'DH05','F005',2,N'')
+go
+INSERT INTO DonHang VALUES ( 12,'DH05','F007',2,N'')
+go
+INSERT INTO DonHang VALUES ( 13,'DH05','D002',6,N'')
+GO
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH06', -- MaDonHang - char(4)
+          'NV03', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  GO
+          INSERT INTO DonHang VALUES ( 14,'DH06','F004',1,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 15,'DH06','D001',2,N'')
+		  GO
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH07', -- MaDonHang - char(4)
+          'NV03', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )  
+		  GO
+		  INSERT INTO DonHang VALUES ( 16,'DH07','F005',20,N'') 
+		  GO
+		  INSERT INTO DonHang VALUES ( 17,'DH07','D001',20,N'')    
+		  go   
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH08', -- MaDonHang - char(4)
+          'NV06', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  go
+ INSERT INTO DonHang VALUES ( 18,'DH08','D001',5,N'')    
+		  GO
+  INSERT INTO DonHang VALUES ( 19,'DH08','F006',5,N'')    
+		  go  
+ INSERT INTO DonHang VALUES ( 20,'DH08','F003',2,N'')    
+		  go		         
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH09', -- MaDonHang - char(4)
+          'NV04', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  go
+INSERT INTO DonHang VALUES ( 21,'DH09','F003',2,N'không cay')    
+		  GO
+INSERT INTO DonHang VALUES ( 22,'DH09','F006',2,N'không cay')  
+			GO
+INSERT INTO DonHang VALUES ( 23,'DH09','F008',2,N'không cay') 
+GO
+INSERT INTO DonHang VALUES ( 24,'DH09','D002',6,N'')
+go     			           
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH10', -- MaDonHang - char(4)
+          'NV07', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  GO
+          INSERT INTO DonHang VALUES ( 25,'DH10','F001',3,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 26,'DH10','F003',6,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 27,'DH10','F002',3,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 28,'DH10','F004',6,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 29,'DH10','F005',4,N'')
+		  go
+		  INSERT INTO DonHang VALUES ( 30,'DH10','D002',19,N'')
+		  go
+		  SELECT * FROM dbo.DonHang
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH11', -- MaDonHang - char(4)
+          'NV10', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  GO
+          INSERT INTO DonHang VALUES ( 31,'DH11','F009',1,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 32,'DH11','F012',2,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 33,'DH11','F013',3,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 34,'DH11','D002',8,N'')
+		  go
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH12', -- MaDonHang - char(4)
+          'NV10', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  GO
+          INSERT INTO DonHang VALUES ( 35,'DH12','F015',2,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 36,'DH12','F014',2,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 37,'DH12','D002',1,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 38,'DH12','D001',1,N'')
+		  go
+--Thống kê nhân viên đã lập bao nhiêu hóa đơn
+SELECT NhanVien.IDNhanVien,HoNhanVien+TenNhanVien AS HoTen, COUNT(MaDonHang) FROM dbo.NhanVien JOIN dbo.HoaDon
+ON HoaDon.IDNhanVien = NhanVien.IDNhanVien
+GROUP BY NhanVien.IDNhanVien,HoNhanVien,TenNhanVien
+--tính lương nhân viên
+SELECT Luong.IDNhanVien,HoNhanVien+TenNhanVien AS HoTenNV, ROUND((((Luong+PhuCap)/NgayCong) * SoNgayLamViec),0) AS LuongThang FROM dbo.Luong JOIN dbo.NhanVien
+ON NhanVien.IDNhanVien = Luong.IDNhanVien
+--Danh sách những nhân viên có tuổi lớn hơn 30
+SELECT IDNhanVien,TenNhanVien,(YEAR(GETDATE())- YEAR(NgaySinh)) AS Tuoi FROM dbo.NhanVien
+WHERE (YEAR(GETDATE())- YEAR(NgaySinh))>30
+--Tính lương của nhân viên
+SELECT Luong.IDNhanVien,HoNhanVien+TenNhanVien AS HoTenNV, ROUND((((Luong+PhuCap)/NgayCong) * SoNgayLamViec),0) AS LuongThang FROM dbo.NhanVien JOIN dbo.Luong
+ON Luong.IDNhanVien = NhanVien.IDNhanVien
+--Tính hóa đơn bán hàng
+SELECT MaDonHang,SoLuong * DonGia AS ThanhTien 
+FROM dbo.DonHang JOIN dbo.MonAn
+ON MonAn.MaMon = DonHang.MaMon
+GROUP BY MaDonHang,SoLuong,DonGia
+--Tính tổng tiền của từng hóa đơn
+SELECT MaDonHang,SUM(SoLuong * DonGia) AS ttien
+FROM dbo.MonAn,dbo.DonHang
+where MonAn.MaMon = DonHang.MaMon
+GROUP BY MaDonHang
+--tính tổng tiền thu được của cửa hàng
+SELECT (SUM(SoLuong * DonGia) )AS ttien
+FROM dbo.MonAn,dbo.DonHang
+where MonAn.MaMon = DonHang.MaMon
+--tính lương của nhân viên và sắp xếp giảm dần
+SELECT Luong.IDNhanVien,HoNhanVien+TenNhanVien AS HoTenNV, ROUND((((Luong+PhuCap)/NgayCong) * SoNgayLamViec),0) AS LuongThang FROM dbo.NhanVien JOIN dbo.Luong
+ON Luong.IDNhanVien = NhanVien.IDNhanVien
+ORDER BY LuongThang DESC
+--kiểm tra số lượng món ăn bán trong ngày
+SELECT SUM(SoLuong) AS SoLuong ,MaMon FROM dbo.DonHang JOIN dbo.HoaDon
+ON HoaDon.MaDonHang = DonHang.MaDonHang
+WHERE day(ThoiGian)='3' AND MONTH(ThoiGian)='1' AND YEAR(ThoiGian)='2019'
+GROUP BY MaMon
+SELECT SUM(SoLuong) AS SoLuong FROM dbo.DonHang JOIN dbo.HoaDon
+ON HoaDon.MaDonHang = DonHang.MaDonHang
+WHERE day(ThoiGian)='3' AND MONTH(ThoiGian)='1' AND YEAR(ThoiGian)='2019'
+--Kiểm tra những nhân viên ở TP HCM
+SELECT IDNhanVien, HoNhanVien + TenNhanVien AS HoVaTen,GioiTinh,DiaChi,Sdt FROM dbo.NhanVien
+WHERE DiaChi LIKE '%HCM'
+--Tăng lương cho nhân viên trên 40 tuổi
+UPDATE Luong SET Luong=Luong+200000 FROM dbo.Luong JOIN dbo.NhanVien
+ON NhanVien.IDNhanVien = Luong.IDNhanVien
+WHERE YEAR(GETDATE())-YEAR(NgaySinh)>40
+--Tạo các tài khoản đăng nhập quản lý
+SELECT * FROM dbo.MonAn
+INSERT INTO dbo.MonAn
+        ( MaMon, TenMon, DonGia, DonViTinh )
+VALUES  ( 'F016', -- MaMon - char(4)
+          N'Khô bò', -- TenMon - nvarchar(30)
+          50000, -- DonGia - numeric
+          N'dĩa'  -- DonViTinh - nvarchar(10)
+          )
+
+
+
+		
+
