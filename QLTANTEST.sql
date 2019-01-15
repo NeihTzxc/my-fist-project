@@ -517,13 +517,268 @@ go
 INSERT INTO DonHang VALUES ( 8,'DH04','F002',2,N'')
 go
 INSERT INTO DonHang VALUES ( 9,'DH04','D002',2,N'')
---Thống kê nhân viên đã lập bao nhiêu hóa đơn
-SELECT NhanVien.IDNhanVien,HoNhanVien+TenNhanVien AS HoTen, COUNT(MaDonHang) FROM dbo.NhanVien JOIN dbo.HoaDon
+SELECT * FROM dbo.HoaDon
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH05', -- MaDonHang - char(4)
+          'NV01', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+INSERT INTO DonHang VALUES ( 10,'DH05','F004',2,N'')
+go
+INSERT INTO DonHang VALUES (11 ,'DH05','F005',2,N'')
+go
+INSERT INTO DonHang VALUES ( 12,'DH05','F007',2,N'')
+go
+INSERT INTO DonHang VALUES ( 13,'DH05','D002',6,N'')
+GO
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH06', -- MaDonHang - char(4)
+          'NV03', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  GO
+          INSERT INTO DonHang VALUES ( 14,'DH06','F004',1,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 15,'DH06','D001',2,N'')
+		  GO
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH07', -- MaDonHang - char(4)
+          'NV03', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )  
+		  GO
+		  INSERT INTO DonHang VALUES ( 16,'DH07','F005',20,N'') 
+		  GO
+		  INSERT INTO DonHang VALUES ( 17,'DH07','D001',20,N'')    
+		  go   
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH08', -- MaDonHang - char(4)
+          'NV06', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  go
+ INSERT INTO DonHang VALUES ( 18,'DH08','D001',5,N'')    
+		  GO
+  INSERT INTO DonHang VALUES ( 19,'DH08','F006',5,N'')    
+		  go  
+ INSERT INTO DonHang VALUES ( 20,'DH08','F003',2,N'')    
+		  go		         
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH09', -- MaDonHang - char(4)
+          'NV04', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  go
+INSERT INTO DonHang VALUES ( 21,'DH09','F003',2,N'không cay')    
+		  GO
+INSERT INTO DonHang VALUES ( 22,'DH09','F006',2,N'không cay')  
+			GO
+INSERT INTO DonHang VALUES ( 23,'DH09','F008',2,N'không cay') 
+GO
+INSERT INTO DonHang VALUES ( 24,'DH09','D002',6,N'')
+go     			           
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH10', -- MaDonHang - char(4)
+          'NV07', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  GO
+          INSERT INTO DonHang VALUES ( 25,'DH10','F001',3,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 26,'DH10','F003',6,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 27,'DH10','F002',3,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 28,'DH10','F004',6,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 29,'DH10','F005',4,N'')
+		  go
+		  INSERT INTO DonHang VALUES ( 30,'DH10','D002',19,N'')
+		  go
+		  SELECT * FROM dbo.DonHang
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH11', -- MaDonHang - char(4)
+          'NV10', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  GO
+          INSERT INTO DonHang VALUES ( 31,'DH11','F009',1,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 32,'DH11','F012',2,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 33,'DH11','F013',3,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 34,'DH11','D002',8,N'')
+		  go
+INSERT INTO dbo.HoaDon
+        ( MaDonHang, IDNhanVien, ThoiGian )
+VALUES  ( 'DH12', -- MaDonHang - char(4)
+          'NV10', -- IDNhanVien - char(4)
+          GETDATE()  -- ThoiGian - datetime
+          )
+		  GO
+          INSERT INTO DonHang VALUES ( 35,'DH12','F015',2,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 36,'DH12','F014',2,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 37,'DH12','D002',1,N'')
+		  GO
+          INSERT INTO DonHang VALUES ( 38,'DH12','D001',1,N'')
+		  go
+--1.Thống kê nhân viên đã lập bao nhiêu hóa đơn
+SELECT NhanVien.IDNhanVien,HoNhanVien+TenNhanVien AS HoTen, COUNT(MaDonHang)AS SoLuong FROM dbo.NhanVien JOIN dbo.HoaDon
 ON HoaDon.IDNhanVien = NhanVien.IDNhanVien
 GROUP BY NhanVien.IDNhanVien,HoNhanVien,TenNhanVien
---tính lương nhân viên
+--2.tính lương nhân viên
 SELECT Luong.IDNhanVien,HoNhanVien+TenNhanVien AS HoTenNV, ROUND((((Luong+PhuCap)/NgayCong) * SoNgayLamViec),0) AS LuongThang FROM dbo.Luong JOIN dbo.NhanVien
 ON NhanVien.IDNhanVien = Luong.IDNhanVien
+--3.Danh sách những nhân viên có tuổi lớn hơn 30
+SELECT IDNhanVien,TenNhanVien,(YEAR(GETDATE())- YEAR(NgaySinh)) AS Tuoi FROM dbo.NhanVien
+WHERE (YEAR(GETDATE())- YEAR(NgaySinh))>30
+--4.Tính lương của nhân viên
+SELECT Luong.IDNhanVien,HoNhanVien+TenNhanVien AS HoTenNV, ROUND((((Luong+PhuCap)/NgayCong) * SoNgayLamViec),0) AS LuongThang FROM dbo.NhanVien JOIN dbo.Luong
+ON Luong.IDNhanVien = NhanVien.IDNhanVien
+--5.Tính hóa đơn bán hàng
+SELECT MaDonHang,SoLuong * DonGia AS ThanhTien 
+FROM dbo.DonHang JOIN dbo.MonAn
+ON MonAn.MaMon = DonHang.MaMon
+GROUP BY MaDonHang,SoLuong,DonGia
+--6.Tính tổng tiền của từng hóa đơn
+SELECT MaDonHang,SUM(SoLuong * DonGia) AS ttien
+FROM dbo.MonAn,dbo.DonHang
+where MonAn.MaMon = DonHang.MaMon
+GROUP BY MaDonHang
+--7.tính tổng tiền thu được của cửa hàng
+SELECT (SUM(SoLuong * DonGia) )AS ttien
+FROM dbo.MonAn,dbo.DonHang
+where MonAn.MaMon = DonHang.MaMon
+--8.tính lương của nhân viên và sắp xếp giảm dần
+SELECT Luong.IDNhanVien,HoNhanVien+TenNhanVien AS HoTenNV, ROUND((((Luong+PhuCap)/NgayCong) * SoNgayLamViec),0) AS LuongThang FROM dbo.NhanVien JOIN dbo.Luong
+ON Luong.IDNhanVien = NhanVien.IDNhanVien
+ORDER BY LuongThang DESC
+--9.kiểm tra số lượng món ăn bán trong ngày
+SELECT SUM(SoLuong) AS SoLuong ,MaMon FROM dbo.DonHang JOIN dbo.HoaDon
+ON HoaDon.MaDonHang = DonHang.MaDonHang
+WHERE day(ThoiGian)='3' AND MONTH(ThoiGian)='1' AND YEAR(ThoiGian)='2019'
+GROUP BY MaMon
+SELECT SUM(SoLuong) AS SoLuong FROM dbo.DonHang JOIN dbo.HoaDon
+ON HoaDon.MaDonHang = DonHang.MaDonHang
+WHERE day(ThoiGian)='3' AND MONTH(ThoiGian)='1' AND YEAR(ThoiGian)='2019'
+--10.Kiểm tra những nhân viên ở TP HCM
+SELECT IDNhanVien, HoNhanVien + TenNhanVien AS HoVaTen,GioiTinh,DiaChi,Sdt FROM dbo.NhanVien
+WHERE DiaChi LIKE '%HCM'
+--11.Tăng lương cho nhân viên trên 40 tuổi
+UPDATE Luong SET Luong=Luong+200000 FROM dbo.Luong JOIN dbo.NhanVien
+ON NhanVien.IDNhanVien = Luong.IDNhanVien
+WHERE YEAR(GETDATE())-YEAR(NgaySinh)>40
+--12.Tạo các tài khoản đăng nhập quản lý
+SELECT * FROM dbo.MonAn
+INSERT INTO dbo.MonAn
+        ( MaMon, TenMon, DonGia, DonViTinh )
+VALUES  ( 'F016', -- MaMon - char(4)
+          N'Khô bò', -- TenMon - nvarchar(30)
+          50000, -- DonGia - numeric
+          N'dĩa'  -- DonViTinh - nvarchar(10)
+          )
+--13.Tạo ra tài khoản đăng nhập cho các quản lí: ‘ql1’,’ql2’,’ql3’ và cho giám đốc là ‘gd1’ với mật khẩu tùy ý 
+CREATE LOGIN ql1
+WITH PASSWORD ='123456',
+DEFAULT_DATABASE= QLTAN_GITHUB1
+CREATE LOGIN ql2
+WITH PASSWORD ='123456',
+DEFAULT_DATABASE= QLTAN_GITHUB1
+CREATE LOGIN ql3
+WITH PASSWORD ='123456',
+DEFAULT_DATABASE= QLTAN_GITHUB1
+CREATE LOGIN gd1
+WITH PASSWORD ='123456',
+DEFAULT_DATABASE= QLTAN_GITHUB1
+USE QLTAN_GITHUB1
+GO
+GRANT SELECT  ON dbo.Luong TO gd1
+--14.Kiểm tra nếu NV có độ tuổi lớn hơn 40 thì sẽ không được xóa
+CREATE TRIGGER UTG
+ON NHANVIENFOR DELETE
+AS
+BEGIN
+	DECLARE @count INT=0
+	SELECT  @count=count(*)  FROM DELETED
+	WHERE YEAR(GETDATE)-YEAR(NGAYSINH)>40
+ 	IF @count>0
+BEGIN
+PRINT N'Không được xóa giáo viên trên 40 tuổi'
+	ROLLBACK TRAN
+	ENDEND
+--15.in ra id và tên nhân viên giới tính nam
+SELECT TenNhanVien+HoNhanVien AS HoTen,IDNhanVien FROM dbo.NhanVien WHERE GioiTinh='M' 
+--16.lấy ra tên những món có giá lớn hơn 10000d
+SELECT TenMon,DonViTinh FROM dbo.MonAn WHERE DonGia>10000
+--17.lấy ra những hóa đơn có giá trị lớn hơn 100000d
+SELECT MaDonHang,SUM(SoLuong * DonGia) AS ThanhTien
+FROM dbo.MonAn,dbo.DonHang
+where MonAn.MaMon = DonHang.MaMon
+GROUP BY MaDonHang
+HAVING SUM(SoLuong * DonGia)>100000
+--18.in ra danh sách nhân viên theo thứ tự giam dần
+SELECT HoNhanVien+TenNhanVien AS HoTen, IDNhanVien,NgaySinh FROM dbo.NhanVien 
+ORDER BY TenNhanVien ASC
+--19.xuất ra thông tin nhân viên bắt đầu bằng chũ N
+SELECT * FROM dbo.NhanVien 
+WHERE  TenNhanVien LIKE 'N%'
+--20.tăng giá món cơm gà thêm 3000d
+SELECT * FROM dbo.MonAn
+WHERE TenMon LIKE 'Cơm gà%'
+UPDATE dbo.MonAn
+SET DonGia=DonGia+3000
+WHERE MaMon='F009'
+--21.xóa những đơn đặt hàng trước ngày 10 tháng 1 năm 2019
+DELETE FROM dbo.HoaDon 
+WHERE ThoiGian<'2019-01-10'
+------
+SELECT * FROM dbo.NhanVien
+UPDATE dbo.NhanVien SET TenNhanVien=N'Hương'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV02'
+UPDATE dbo.NhanVien SET TenNhanVien=N'Ánh'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV03'
+UPDATE dbo.NhanVien SET TenNhanVien=N'Sơn'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV04'
+go
+UPDATE dbo.NhanVien SET TenNhanVien=N'Hà'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV05'
+go
+UPDATE dbo.NhanVien SET TenNhanVien=N'Tuyết'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV06'
+go
+UPDATE dbo.NhanVien SET TenNhanVien=N'Trung'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV07'
+go
+UPDATE dbo.NhanVien SET TenNhanVien=N'Nam'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV08'
+go
+UPDATE dbo.NhanVien SET TenNhanVien=N'Thanh'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV09'
+go
+UPDATE dbo.NhanVien SET TenNhanVien=N'Hùng'
+FROM dbo.NhanVien
+WHERE IDNhanVien='NV10'
+go
+
+
 
 
 
