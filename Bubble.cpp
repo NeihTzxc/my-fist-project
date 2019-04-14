@@ -15,7 +15,7 @@ int r=90;
 int bankinh=50;
 int SizeW=20;
 int Sizet=SizeW-3;
-char bkcolor=1;
+char bkcolor=11;
 void VeBongRong(int x,int y)
 {
 	setcolor(bkcolor);
@@ -89,9 +89,8 @@ void RandomToaDo()// hàm tao to do random
 	cout<<"\nv2("<<a2<<" , "<<b2<<")";
 	cout<<"\nv3("<<a3<<" , "<<b3<<")";
 	cout<<"\nv4("<<a4<<" , "<<b4<<")";
-	cout<<"\nv4("<<a5<<" , "<<b5<<")";
+	cout<<"\nv5("<<a5<<" , "<<b5<<")";
 }
-
 class Buctuong{
 	
 	public :
@@ -130,6 +129,14 @@ int main()
 {	
 	RandomToaDo();
 	float y=ktmanhinhy,x=ktmanhinhx,t1=0,t2=0;
+	int bk;
+	do{
+	cout<<"\nNhap ban kinh cho qua bong (20 --> 50): "; cin>>bk;
+	}
+	while(bk<20 ||bk>50);
+	bankinh=bk;
+	r=bk*2;
+//	readimagefile("image.jpg",0,0,400,200);
 	initwindow(700,500);
 	graphresult(); 
 	setbkcolor(bkcolor);
@@ -188,6 +195,7 @@ int main()
 		VeBongRong(x3,y3);
 		VeBongRong(x4,y4);
 		VeBongRong(x5,y5);
+		
 		if(y1>=ktmanhinhy-Bankinh-SizeW||y2>=ktmanhinhy-Bankinh-SizeW||y3>=ktmanhinhy-Bankinh-SizeW||y4>=ktmanhinhy-Bankinh-SizeW||y5>=ktmanhinhy-Bankinh-SizeW)
 			{
 			if(y1>=ktmanhinhy-Bankinh-SizeW) //hàm va cham bóng 1
@@ -371,9 +379,3 @@ int main()
 	closegraph();  
 	return 0;
 }
-
-
-
-
-
-

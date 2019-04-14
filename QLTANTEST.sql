@@ -1,4 +1,4 @@
-﻿CREATE DATABASE QLTAN_GITHUB1
+CREATE DATABASE QLTAN_GITHUB1
 go
 USE QLTAN_GITHUB1
 GO
@@ -678,15 +678,7 @@ WHERE DiaChi LIKE '%HCM'
 UPDATE Luong SET Luong=Luong+200000 FROM dbo.Luong JOIN dbo.NhanVien
 ON NhanVien.IDNhanVien = Luong.IDNhanVien
 WHERE YEAR(GETDATE())-YEAR(NgaySinh)>40
---12.Tạo các tài khoản đăng nhập quản lý
-SELECT * FROM dbo.MonAn
-INSERT INTO dbo.MonAn
-        ( MaMon, TenMon, DonGia, DonViTinh )
-VALUES  ( 'F016', -- MaMon - char(4)
-          N'Khô bò', -- TenMon - nvarchar(30)
-          50000, -- DonGia - numeric
-          N'dĩa'  -- DonViTinh - nvarchar(10)
-          )
+
 --13.Tạo ra tài khoản đăng nhập cho các quản lí: ‘ql1’,’ql2’,’ql3’ và cho giám đốc là ‘gd1’ với mật khẩu tùy ý 
 CREATE LOGIN ql1
 WITH PASSWORD ='123456',
@@ -776,8 +768,43 @@ go
 UPDATE dbo.NhanVien SET TenNhanVien=N'Hùng'
 FROM dbo.NhanVien
 WHERE IDNhanVien='NV10'
+GO
+CREATE TRIGGER UST ON dbo.NhanVien
+AFTER INSERT 
+AS 
+BEGIN
+UPDATE dbo.Luong
+SET 
 go
-
+CREATE TRIGGER TINSERT
+ON NHANVIENFOR insert
+AS
+BEGIN
+	DECLARE @count INT=0
+	SELECT  @count=count(*)  FROM Inserted
+	WHERE YEAR(GETDATE())-YEAR(NGAYSINH)>40
+ 	IF @count>0
+BEGIN
+PRINT N'Không được chèn giáo viên trên 40 tuổi'
+	ROLLBACK TRAN
+	ENDEND
+INSERT INTO dbo.NhanVien 
+        ( IDNhanVien ,
+          HoNhanVien ,
+          TenNhanVien ,
+          NgaySinh ,
+          GioiTinh ,
+          DiaChi ,
+          Sdt
+        )
+VALUES  ( 'NV99' , -- IDNhanVien - char(4)
+          N'NGuyễn' , -- HoNhanVien - nvarchar(30)
+          N'Hiền' , -- TenNhanVien - nvarchar(30)
+          '1930-05-05' , -- NgaySinh - date
+          'F' , -- GioiTinh - char(1)
+          N'Ninh Hòa-Khánh Hòa' , -- DiaChi - nvarchar(50)
+          '0123456789'  -- Sdt - char(10)
+        )
 
 
 
